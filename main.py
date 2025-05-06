@@ -70,10 +70,11 @@ async def create_game(game: Game):
 async def get_game_prompts():
     num_prompts = 8
     num_difficulty_prompts = num_prompts // 4  # 4 difficulties
-    print('num_difficulty_prompts: ', num_difficulty_prompts)
+    # print('num_difficulty_prompts: ', num_difficulty_prompts)
     response = supabase.table("prompts").select("*").execute()
     prompts_dictionary = {'easy': [], 'medium': [], 'hard': [], 'insane': []}
     result = []
+    tug_of_war = []
 
     prompts = response.data
     for prompt in prompts:
@@ -91,11 +92,15 @@ async def get_game_prompts():
         for r in random_values:
             result.append({'text': r})
 
+    insane_prompts_random = random.sample(prompts_dictionary['insane'], 15)
+    for ip in insane_prompts_random:
+        tug_of_war.append({'text': ip})
+
     print('result: ', result)
     if not response.data:
         print('in here')
         raise HTTPException(status_code=400, detail=f"Error: {response.error.message}")
-    return {"message": "Returning game prompts", "data": result}
+    return {"message": "Returning game prompts", "data": {'result': result, 'tug_of_war': tug_of_war}}
 
 
 @app.get("/join_game/{game_id}")
