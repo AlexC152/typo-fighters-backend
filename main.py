@@ -13,10 +13,24 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from supabase import create_client
+from fastapi.middleware.cors import CORSMiddleware
 
 import random
 
 app = FastAPI()
+
+origins = [
+    "http://localhost:3000",           # React dev server
+    "https://team-typo-fighters.vercel.app"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,            # Allows specific origins
+    allow_credentials=True,
+    allow_methods=["*"],              # Allows all HTTP methods
+    allow_headers=["*"],              # Allows all headers
+)
 
 SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 SUPABASE_URL = os.getenv("SUPABASE_URL")
