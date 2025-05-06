@@ -3,6 +3,5 @@ uvicorn
 pydantic
 sqlalchemy
 databases
-python-dotenvsource
 psycopg2-binary
 supabase
