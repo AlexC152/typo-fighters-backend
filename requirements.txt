@@ -3,6 +3,6 @@ uvicorn
 pydantic
 sqlalchemy
 databases
-python-dotenvsource ~/.zshrc
+python-dotenvsource
 psycopg2-binary
 supabase
