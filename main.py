@@ -51,7 +51,7 @@ async def create_game(game: Game):
     return {"message": "Game created successfully", "data": response}
 
 
-@app.get("/get_game_prompts/{num_prompts}")
+@app.get("/get_game_prompts")
 async def get_game_prompts():
     num_prompts = 8
     num_difficulty_prompts = num_prompts // 4  # 4 difficulties
