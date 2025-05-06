@@ -1,0 +1,8 @@
+FastAPI
+uvicorn
+pydantic
+sqlalchemy
+databases
+python-dotenvsource ~/.zshrc
+psycopg2-binary
+supabase
