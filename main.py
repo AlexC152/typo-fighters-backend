@@ -6,7 +6,7 @@ from pydantic import BaseModel
 from typing import List, Dict, Optional
 from models.player import Player
 from models.game import Game
-from models.prompt import Prompt
+from models.prompts import Prompt
 
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
