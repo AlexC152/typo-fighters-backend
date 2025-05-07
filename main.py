@@ -74,7 +74,11 @@ async def create_game(game: Game):
 @app.get("/list_games")
 async def list_games():
     print('getting games')
-    response = supabase.table("games").select("target_text").execute()
+    response = supabase.table("games") \
+        .select("*") \
+        .order("created_at", desc=True) \
+        .limit(10) \
+        .execute()
 
     print('response: ', response)
     # Check for errors in the response
