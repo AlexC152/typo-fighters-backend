@@ -71,8 +71,8 @@ async def create_game(game: Game):
     return {"message": "Game created successfully", "data": response}
     
 @app.get("/list_games")
-async def list_games(game: Game):
-    print('game: ', game)
+async def list_games():
+    print('getting games')
     response = supabase.table("games").select("target_text").execute()
 
     print('response: ', response)
