@@ -69,6 +69,17 @@ async def create_game(game: Game):
     if not response.data:
         raise HTTPException(status_code=400, detail=f"Error: {response.error.message}")
     return {"message": "Game created successfully", "data": response}
+    
+@app.get("/list_games")
+async def create_game(game: Game):
+    print('game: ', game)
+    response = supabase.table("games").select("target_text").execute()
+
+    print('response: ', response)
+    # Check for errors in the response
+    if not response.data:
+        raise HTTPException(status_code=400, detail=f"Error: {response.error.message}")
+    return {"message": "Game created successfully", "data": response}
 
 
 @app.get("/get_game_prompts")
