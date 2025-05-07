@@ -61,7 +61,7 @@ async def create_game(game: Game):
         "target_text": game.room_code,
         "status": "waiting",
         "max_players": 99,
-        "current_round", 1
+        "current_round": 1
     }).execute()
 
     print('response: ', response)
