@@ -195,6 +195,7 @@ async def get_high_scores():
         result["tug_wins"].append(data)
 
     print('result: ', result)
+    return result
     # print('response: ', response)
 
 
