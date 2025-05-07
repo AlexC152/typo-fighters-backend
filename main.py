@@ -23,6 +23,7 @@ app = FastAPI()
 
 origins = [
     "http://localhost:3000",           # React dev server
+    "http://localhost:3001"
     "https://team-typo-fighters.vercel.app",
     "https://www.typo-fight.com"
 ]
