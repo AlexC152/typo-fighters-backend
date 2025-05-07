@@ -58,8 +58,22 @@ async def create_player(player: Player):
 async def create_game(game: Game):
     print('game: ', game)
     response = supabase.table("games").insert({
-        "target_text": "abcde"
+        "target_text": game.room_code,
+        "status": "waiting",
+        "max_players": 99,
+        "current_round": 1
     }).execute()
+
+    print('response: ', response)
+    # Check for errors in the response
+    if not response.data:
+        raise HTTPException(status_code=400, detail=f"Error: {response.error.message}")
+    return {"message": "Game created successfully", "data": response}
+    
+@app.get("/list_games")
+async def list_games():
+    print('getting games')
+    response = supabase.table("games").select("target_text").execute()
 
     print('response: ', response)
     # Check for errors in the response

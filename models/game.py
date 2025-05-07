@@ -9,3 +9,4 @@ class Game(BaseModel):
     target_text: Optional[str] = ""
     time_limit: Optional[int] = 60
     winner_id: Optional[str] = None
+    room_code: str = 'abcdefg'
