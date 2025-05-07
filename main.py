@@ -141,3 +141,48 @@ async def bulk_update_high_scores(updates: List[HighScoreUpdate]):
             # print('not in table')
             supabase.table("high_scores").insert({"username": update.username, "highest_wpm": update.highest_wpm, "games_played": 1, "tug_entries": update.tug_entries, "tug_wins": update.tug_wins}).execute()
 
+@app.get("/high_scores")
+async def get_high_scores():
+    result = {"highest_wpm" : [], "games_played" : [], "tug_entries" : [], "tug_wins": []}
+    highest_wpm_response = supabase.table("high_scores")\
+                            .select("username, highest_wpm")\
+                            .order("highest_wpm", desc=True)\
+                            .limit(10)\
+                            .execute()
+
+    highest_gp_response = supabase.table("high_scores") \
+        .select("username, games_played") \
+        .order("games_played", desc=True) \
+        .limit(10) \
+        .execute()
+
+    highest_te_response = supabase.table("high_scores") \
+        .select("username, tug_entries") \
+        .order("tug_entries", desc=True) \
+        .limit(10) \
+        .execute()
+
+    highest_tw_response = supabase.table("high_scores") \
+        .select("username, tug_wins") \
+        .order("tug_wins", desc=True) \
+        .limit(10) \
+        .execute()
+
+    for data in highest_wpm_response.data:
+        result["highest_wpm"].append(data)
+
+    for data in highest_gp_response.data:
+        result["games_played"].append(data)
+
+    for data in highest_te_response.data:
+        result["tug_entries"].append(data)
+
+    for data in highest_tw_response.data:
+        result["tug_wins"].append(data)
+
+    print('result: ', result)
+    # print('response: ', response)
+
+
+
+
